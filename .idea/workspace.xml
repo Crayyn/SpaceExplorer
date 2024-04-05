@@ -20,11 +20,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9bd77d0a-58f3-47db-a573-c68b9a495515" name="Changes" comment="first working version (random)">
+    <list default="true" id="9bd77d0a-58f3-47db-a573-c68b9a495515" name="Changes" comment="removed big block comment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/space_explorer.dir/compiler_depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/space_explorer.dir/compiler_depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/space_explorer.dir/compiler_depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/space_explorer.dir/compiler_depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/space_explorer.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/space_explorer.dir/objects.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/space_explorer.dir/space_explorer.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/space_explorer.dir/space_explorer.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/space_explorer.dir/space_solution.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/space_explorer.dir/space_solution.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/space_explorer.dir/space_solution.c.obj.d" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/space_explorer.dir/space_solution.c.obj.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/space_explorer.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/space_explorer.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/space_explorer.c" beforeDir="false" afterPath="$PROJECT_DIR$/space_explorer.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/space_solution.c" beforeDir="false" afterPath="$PROJECT_DIR$/space_solution.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +107,7 @@
       <workItem from="1712247749556" duration="162000" />
       <workItem from="1712247942473" duration="71000" />
       <workItem from="1712248072826" duration="14745000" />
-      <workItem from="1712327707534" duration="10830000" />
+      <workItem from="1712327707534" duration="21055000" />
     </task>
     <task id="LOCAL-00001" summary="first working version (random)">
       <option name="closed" value="true" />
@@ -112,7 +117,23 @@
       <option name="project" value="LOCAL" />
       <updated>1712266450695</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="backtracking working with a little bit of optimisation">
+      <option name="closed" value="true" />
+      <created>1712339901799</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1712339901799</updated>
+    </task>
+    <task id="LOCAL-00003" summary="removed big block comment">
+      <option name="closed" value="true" />
+      <created>1712340256453</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1712340256453</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,6 +146,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first working version (random)" />
-    <option name="LAST_COMMIT_MESSAGE" value="first working version (random)" />
+    <MESSAGE value="backtracking working with a little bit of optimisation" />
+    <MESSAGE value="removed big block comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed big block comment" />
   </component>
 </project>
