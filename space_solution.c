@@ -105,21 +105,3 @@ ShipAction space_hop(unsigned int crt_planet,
 
     return action;
 }
-/**
-    if (distance_from_mixer > 0.0 && state->previous_planet == 0) {
-        action.ship_state = state;
-        action.next_planet = RAND_PLANET;
-    } else if (distance_from_mixer > 0.0 && state->previous_planet != 0) {
-        action.ship_state = state;
-        action.next_planet = state->previous_planet;
-
-    } else if (distance_from_mixer <= 0.0 && state->previous_planet != 0 && state->previous_planet != crt_planet) {
-        action.ship_state = state;
-        action.next_planet = state->previous_planet;
-    } else {
-        state->connection_search++;
-        printf("connection_search: %d\n", state->connection_search);
-        action.ship_state = state;
-        action.next_planet = connections[state->connection_search];
-    }
-*/
