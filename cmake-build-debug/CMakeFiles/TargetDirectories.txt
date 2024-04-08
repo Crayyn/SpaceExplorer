@@ -1,3 +1,3 @@
-C:/Users/isaac/Downloads/space_explorer/cmake-build-debug/CMakeFiles/space_explorer.dir
-C:/Users/isaac/Downloads/space_explorer/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/isaac/Downloads/space_explorer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/isaac/CLionProjects/SpaceExplorer/cmake-build-debug/CMakeFiles/space_explorer.dir
+C:/Users/isaac/CLionProjects/SpaceExplorer/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/isaac/CLionProjects/SpaceExplorer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
