@@ -7,6 +7,7 @@
 typedef struct {
     unsigned int *visited;
     unsigned int *previous_connections;
+    unsigned int *useable_rands;
     int previous_num_connections;
     int visited_count;
     unsigned int closest_planet;
@@ -32,6 +33,8 @@ ShipAction space_hop(unsigned int crt_planet,
         state->previous_num_connections = num_connections;
         state->previous_connections = malloc(sizeof(int) * 300);
         memset(state->previous_connections, 0, sizeof(int) * 300);
+        state->useable_rands = malloc(sizeof(int) * 300);
+        memset(state->useable_rands, 0, sizeof(int) * 300);
         state->previous_connections_count = 0;
         state->closest_planet = 0;
         state->closest_distance = 10000.0;
@@ -41,13 +44,30 @@ ShipAction space_hop(unsigned int crt_planet,
         state->already_visited_this_planet = false;
     }
 
+    unsigned int random_planet = RAND_PLANET;
+    bool already_visited_random = false;
+
     // Check if I've already visited this planet
     for (int i = 0; i < state->visited_count; i++) {
-        if (state->visited[i] == crt_planet) {
+        if (state->visited[i] == random_planet) {
+            already_visited_random = true;
+        }
+        else if (state->visited[i] == crt_planet) {
             state->already_visited_this_planet = true;
-            break;
         }
     }
+
+
+    for (int i = 0; i < 300; i++) {
+        if (state->useable_rands[i] == 0 && !already_visited_random) {
+            state->useable_rands[i] = random_planet;
+
+        } else if (state->useable_rands[i] == crt_planet && state->already_visited_this_planet) {
+            state->useable_rands[i] = 0;
+        }
+    }
+
+
     // Add this planet to the visited array
     if (!state->already_visited_this_planet) {
         state->visited[state->visited_count] = crt_planet;
@@ -117,13 +137,27 @@ ShipAction space_hop(unsigned int crt_planet,
 
     } else if (num_of_previous_connections_visited == state->previous_num_connections) {
         action.ship_state = state;
-        action.next_planet = RAND_PLANET;
+        for (int i = 0; i < 300; i++) {
+            if (state->useable_rands[i] != 0) {
+                action.next_planet = state->useable_rands[i];
+                break;
+            } else{
+                action.next_planet = RAND_PLANET;
+            }
+        }
         printf("random planet used\n");
         state->just_used_random = true;
 
     } else if (distance_from_mixer > state->closest_distance && state->just_used_random) {
         action.ship_state = state;
-        action.next_planet = RAND_PLANET;
+        for (int i = 0; i < 300; i++) {
+            if (state->useable_rands[i] != 0) {
+                action.next_planet = state->useable_rands[i];
+                break;
+            } else{
+                action.next_planet = RAND_PLANET;
+            }
+        }
         printf("random planet used\n");
 
     } else {
