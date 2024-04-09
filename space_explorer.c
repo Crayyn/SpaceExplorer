@@ -185,7 +185,7 @@ int main(int argc, char *argv[]) {
     if (argc > 1) {
         seed = strtol(argv[1], NULL, 10);
     } else {
-        seed = 10200;  // Default seed if not provided
+        seed = 12;  // Default seed if not provided
     }
     srand48(seed);
 

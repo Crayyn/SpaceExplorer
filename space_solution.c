@@ -10,10 +10,13 @@ typedef struct {
     int previous_num_connections;
     int visited_count;
     unsigned int closest_planet;
+    unsigned int second_closest_planet;
     double closest_distance;
+    double second_closest_distance;
     bool already_visited_this_planet;
     bool just_used_random;
     int previous_connections_count;
+    bool first_planet;
 }ShipState;
 
 
@@ -34,8 +37,11 @@ ShipAction space_hop(unsigned int crt_planet,
         memset(state->previous_connections, 0, sizeof(int) * 300);
         state->previous_connections_count = 0;
         state->closest_planet = 0;
+        state->second_closest_planet = 0;
         state->closest_distance = 10000.0;
+        state->second_closest_distance = 10000.0;
         state->visited_count = 0;
+        state->first_planet = true;
     } else {
         state = ship_state;
         state->already_visited_this_planet = false;
@@ -92,10 +98,16 @@ ShipAction space_hop(unsigned int crt_planet,
     printf("previous_num_connections: %d\n", state->previous_num_connections);
     printf("num_of_previous_connections_visited: %d\n", num_of_previous_connections_visited);
 
-
+    if (state->first_planet) {
+        state->first_planet = false;
+        action.ship_state = state;
+        action.next_planet = RAND_PLANET;
+        return action;
+    }
 
     if(distance_from_mixer <= state->closest_distance) {
-
+        state->second_closest_distance = state->closest_distance;
+        state->second_closest_planet = state->closest_planet;
         state->closest_planet = crt_planet;
         state->closest_distance = distance_from_mixer;
         state->previous_num_connections = num_connections;
@@ -117,9 +129,15 @@ ShipAction space_hop(unsigned int crt_planet,
 
     } else if (num_of_previous_connections_visited == state->previous_num_connections) {
         action.ship_state = state;
-        action.next_planet = RAND_PLANET;
-        printf("random planet used\n");
-        state->just_used_random = true;
+        if (state->second_closest_distance == state->closest_distance) {
+            action.next_planet = state->second_closest_planet;
+            printf("Backtrack used\n");
+        } else {
+            action.next_planet = RAND_PLANET;
+            printf("random planet used\n");
+            state->just_used_random = true;
+        }
+
 
     } else if (distance_from_mixer > state->closest_distance && state->just_used_random) {
         action.ship_state = state;
