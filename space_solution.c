@@ -17,6 +17,7 @@ typedef struct {
     bool just_used_random;
     int previous_connections_count;
     bool first_planet;
+    int backtrack_counter;
 }ShipState;
 
 
@@ -42,6 +43,7 @@ ShipAction space_hop(unsigned int crt_planet,
         state->second_closest_distance = 10000.0;
         state->visited_count = 0;
         state->first_planet = true;
+        state->backtrack_counter = 0;
     } else {
         state = ship_state;
         state->already_visited_this_planet = false;
@@ -87,7 +89,7 @@ ShipAction space_hop(unsigned int crt_planet,
 
 
     ShipAction action;
-    printf("Current planet: %u Visited: %d\n", crt_planet, state->already_visited_this_planet);
+    printf("\nCurrent planet: %u Visited: %d\n", crt_planet, state->already_visited_this_planet);
     printf("Connections: %d\n", num_connections);
     for (int i = 0; i < num_connections; i++) {
         printf("Connection %d: %u Visited: %d\n", i, connections[i], local_connections_ive_been_to[i]);
@@ -99,9 +101,13 @@ ShipAction space_hop(unsigned int crt_planet,
     printf("num_of_previous_connections_visited: %d\n", num_of_previous_connections_visited);
 
     if (state->first_planet) {
+        state->closest_distance = distance_from_mixer;
+        state->closest_planet = crt_planet;
         state->first_planet = false;
         action.ship_state = state;
         action.next_planet = RAND_PLANET;
+        printf("random planet used\n");
+        state->just_used_random = true;
         return action;
     }
 
@@ -132,6 +138,15 @@ ShipAction space_hop(unsigned int crt_planet,
         if (state->second_closest_distance == state->closest_distance) {
             action.next_planet = state->second_closest_planet;
             printf("Backtrack used\n");
+            state->backtrack_counter++;
+            if (state->backtrack_counter > 3) {
+                action.next_planet = RAND_PLANET;
+                printf("random planet used\n");
+                state->just_used_random = true;
+                state->backtrack_counter = 0;
+            }
+
+
         } else {
             action.next_planet = RAND_PLANET;
             printf("random planet used\n");
