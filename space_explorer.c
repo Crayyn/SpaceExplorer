@@ -185,7 +185,7 @@ int main(int argc, char *argv[]) {
     if (argc > 1) {
         seed = strtol(argv[1], NULL, 10);
     } else {
-        seed = 5;  // Default seed if not provided
+        seed = 240704;  // Default seed if not provided
     }
     srand48(seed);
 
@@ -198,6 +198,9 @@ int main(int argc, char *argv[]) {
     // Select the start and treasure
     Planet *start, *treasure;
     select_start_and_treasure(planets, num_points, &start, &treasure);
+// todo delete
+    printf("Start planet: %d\n", start->planet_id);
+    printf("Treasure planet: %d\n", treasure->planet_id);
 
     // Run the game
     void *ship_state = NULL;

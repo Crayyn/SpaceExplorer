@@ -31,11 +31,11 @@ ShipAction space_hop(unsigned int crt_planet,
 
     if (ship_state == NULL) {
         state = malloc(sizeof(ShipState));
-        state->visited = malloc(sizeof(int) * 300);
-        memset(state->visited, 0, sizeof(int) * 300);
+        state->visited = malloc(sizeof(int) * 500);
+        memset(state->visited, 0, sizeof(int) * 500);
         state->previous_num_connections = num_connections;
-        state->previous_connections = malloc(sizeof(int) * 300);
-        memset(state->previous_connections, 0, sizeof(int) * 300);
+        state->previous_connections = malloc(sizeof(int) * 500);
+        memset(state->previous_connections, 0, sizeof(int) * 500);
         state->previous_connections_count = 0;
         state->closest_planet = 0;
         state->second_closest_planet = 0;
@@ -73,14 +73,14 @@ ShipAction space_hop(unsigned int crt_planet,
         }
     }
 
-    // Check if I've already visited any of the previous connections
+    // Check if I've already visited any of the previous connections and count them
     int* previous_connections_ive_been_to = malloc(sizeof(int) * state -> previous_num_connections);
     memset(previous_connections_ive_been_to, 0, sizeof(int) * state -> previous_num_connections);
     int num_of_previous_connections_visited = 0;
     for (int i = 0; i < state -> previous_num_connections; i++) {
         for (int j = 0; j < state->visited_count; j++) {
             if (state->visited[j] == state->previous_connections[i]) {
-                previous_connections_ive_been_to[i] = 1;
+                previous_connections_ive_been_to[i] = 1; 
                 num_of_previous_connections_visited++;
                 break;
             }
@@ -112,12 +112,15 @@ ShipAction space_hop(unsigned int crt_planet,
     }
 
     if(distance_from_mixer <= state->closest_distance) {
-        state->second_closest_distance = state->closest_distance;
-        state->second_closest_planet = state->closest_planet;
+        if (state->closest_distance != distance_from_mixer){
+            state->second_closest_planet = state->closest_planet;
+            state->second_closest_distance = state->closest_distance;
+        }
         state->closest_planet = crt_planet;
         state->closest_distance = distance_from_mixer;
         state->previous_num_connections = num_connections;
-        memset(state->previous_connections, 0, sizeof(int) * 300);
+        state->backtrack_counter = 0;
+        memset(state->previous_connections, 0, sizeof(int) * 500);
         for (int i = 0; i < num_connections; i++) {
             state->previous_connections[i] = connections[i];
         }
@@ -135,15 +138,15 @@ ShipAction space_hop(unsigned int crt_planet,
 
     } else if (num_of_previous_connections_visited == state->previous_num_connections) {
         action.ship_state = state;
-        if (state->second_closest_distance == state->closest_distance) {
+        if (state->second_closest_distance == state->closest_distance == distance_from_mixer) {
             action.next_planet = state->second_closest_planet;
             printf("Backtrack used\n");
             state->backtrack_counter++;
-            if (state->backtrack_counter > 3) {
+            if (state->backtrack_counter > 2) {
                 action.next_planet = RAND_PLANET;
                 printf("random planet used\n");
                 state->just_used_random = true;
-                state->backtrack_counter = 0;
+
             }
 
 
@@ -157,7 +160,7 @@ ShipAction space_hop(unsigned int crt_planet,
     } else if (distance_from_mixer > state->closest_distance && state->just_used_random) {
         action.ship_state = state;
         action.next_planet = RAND_PLANET;
-        printf("random planet used\n");
+        //printf("random planet used\n");
 
     } else {
         action.ship_state = state;
